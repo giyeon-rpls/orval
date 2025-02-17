@@ -1103,7 +1103,7 @@ const generateQueryHook = async (
   let mutators = undefined;
 
   let isQuery =
-    Verbs.GET === verb &&
+    // Verbs.GET === verb &&
     (override.query.useQuery ||
       override.query.useSuspenseQuery ||
       override.query.useInfinite ||
@@ -1277,7 +1277,8 @@ const generateQueryHook = async (
         : undefined;
   }
 
-  let isMutation = verb !== Verbs.GET && override.query.useMutation;
+  // let isMutation = verb !== Verbs.GET && override.query.useMutation;
+  let isMutation = override.query.useMutation;
   if (operationQueryOptions?.useMutation !== undefined) {
     isMutation = operationQueryOptions.useMutation;
   }
@@ -1415,7 +1416,7 @@ ${mutationOptionsFn}
     export type ${pascal(operationName)}MutationError = ${errorType}
 
     ${doc}export const ${camel(
-      `${operationPrefix}-${operationName}`,
+      `${operationPrefix}-${operationName}-mutation`,
     )} = <TError = ${errorType},
     TContext = unknown>(${mutationArguments})${generateMutatorReturnType({
       outputClient,
